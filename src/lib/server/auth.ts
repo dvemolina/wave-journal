@@ -1,3 +1,4 @@
+/*
 import type { RequestEvent } from '@sveltejs/kit';
 import { eq } from 'drizzle-orm';
 import { sha256 } from '@oslojs/crypto/sha2';
@@ -79,3 +80,4 @@ export function deleteSessionTokenCookie(event: RequestEvent) {
 		path: '/'
 	});
 }
+*/
