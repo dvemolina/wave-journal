@@ -1,36 +1,68 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  
-  let map = $state();
-  let L = $state();
 
-  onMount(async () => {
-    // Dynamically import Leaflet only on the client
-    const leaflet = await import('leaflet');
-    await import('leaflet/dist/leaflet.css');
-    L = leaflet.default;
+  //TRY PREVIOUS MOROCCO MAP IMPLEMENTATION WITH SSR DISABLED IN LAYOUT.SVELTE 
 
-    // Hardcode a few spots for testing (Morocco-focused)
-    const spots = [
-      { id: 1, name: "Anchor Point", lat: 30.509, lon: -9.684 },
-      { id: 2, name: "Devil’s Rock", lat: 30.536, lon: -9.697 },
-    ];
+	import { createEventDispatcher, onDestroy, onMount, setContext, tick, type Snippet } from "svelte";
+	import L from "leaflet";
+  import 'leaflet/dist/leaflet.css';
 
-    // Initialize map centered on Morocco
-    map = L.map('map').setView([30.0, -9.0], 8);
+  interface Props {
+    children?: Snippet | undefined;
+    bounds?: L.LatLngBoundsExpression  | undefined;
+    view?: L.LatLngExpression | undefined;
+    zoom?: number | undefined;
+  }
 
-    // Add OpenStreetMap tiles
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors',
-    }).addTo(map);
+  let { children, bounds = undefined, view = undefined, zoom = undefined}: Props = $props()
 
-    // Add markers for hardcoded spots
-    spots.forEach(spot => {
-      L.marker([spot.lat, spot.lon])
-        .bindPopup(`<b>${spot.name}</b>`)
-        .addTo(map);
-    });
-  });
-</script>
 
-<div id="map" style="height: 500px; width: 100%;"></div>
+  let map: L.Map | undefined = $state()
+  let mapElement: HTMLElement;
+
+  const dispatch = createEventDispatcher();
+
+  onMount(() => {
+		if (!bounds && (!view || !zoom)) {
+			throw new Error('Must set either bounds, or view and zoom.');
+		}
+
+		map = L.map(mapElement)
+			// example to expose map events to parent components:
+			.on('zoom', (e) => dispatch('zoom', e))
+			.on('popupopen', async (e) => {
+				await tick();
+				e.popup.update();
+			});
+
+		L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+			attribution: `&copy;<a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>,&copy;<a href="https://carto.com/attributions" target="_blank">CARTO</a>`
+		}).addTo(map);
+	});
+
+	onDestroy(() => {
+		map?.remove();
+		map = undefined;
+	});
+
+	setContext('map', {
+		getMap: () => map
+	});
+
+	$effect(() => {
+    if (map) {
+      if (bounds) {
+        map.fitBounds(bounds);
+      } else if (view && zoom) {
+        map.setView(view, zoom);
+      }
+    }
+  }) 
+
+</script> 
+
+<div class="w-full h-full" bind:this={mapElement}>
+  {#if map}
+    {@render children?.()}
+  {/if}
+  </div>
+
