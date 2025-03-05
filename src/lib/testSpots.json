@@ -1,0 +1,52 @@
+[
+  {
+    "name": "25",
+    "link": "https://www.surf-forecast.com/breaks/Le-25",
+    "region": "Central Morocco",
+    "lat": 30.57,
+    "lon": -9.7459,
+    "reliability": "Point",
+    "bestSeason": "Best Season: Winter",
+    "rating": "2"
+  },
+  {
+    "name": "Dracula",
+    "link": "https://www.surf-forecast.com/breaks/Dracula",
+    "region": "Central Morocco",
+    "lat": 30.6228,
+    "lon": -9.8803,
+    "reliability": "Reef",
+    "bestSeason": "Best Season: Winter",
+    "rating": "5"
+  },
+  {
+    "name": "Pointe d'Imessouane",
+    "link": "https://www.surf-forecast.com/breaks/Pointed-Imessouane",
+    "region": "Central Morocco",
+    "lat": 30.838,
+    "lon": -9.8175,
+    "reliability": "Point",
+    "bestSeason": "Best Season: Winter",
+    "rating": "4"
+  },
+  {
+    "name": "Anchor Point",
+    "link": "https://www.surf-forecast.com/breaks/La-Pointedes-Ancres",
+    "region": "Central Morocco",
+    "lat": 30.5485,
+    "lon": -9.7288,
+    "reliability": "Point",
+    "bestSeason": "Best Season: Winter",
+    "rating": "5"
+  },
+  {
+    "name": "Hash Point",
+    "link": "https://www.surf-forecast.com/breaks/Hash-Point",
+    "region": "Central Morocco",
+    "lat": 30.5478,
+    "lon": -9.712,
+    "reliability": "Point",
+    "bestSeason": "Best Season: Winter",
+    "rating": "2"
+  }
+]

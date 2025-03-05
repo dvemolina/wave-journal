@@ -1,5 +1,64 @@
 @import 'tailwindcss';
 
-html,body {
-    height: 100%;
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	background-color: var(--rootBackground);
 }
+
+/* Theming */
+:root {
+	--rootBackground: rgb(232, 232, 232);
+	--dark: rgb(5, 5, 5);
+	--neutral: rgb(118, 118, 118);
+	--light: rgb(247, 247, 247);
+	--noto: 'Noto Sans';
+	--share: 'Share';
+	--tech: 'Share Tech';
+}
+
+.light {
+	--text: var(--dark);
+	--textNeutral: var(--neutral);
+	--background: var(--light);
+}
+
+/* Containers */
+section {
+	display: flex;
+	flex-direction: column;
+	padding: 2rem 0;
+	width: 100%;
+}
+
+.box {
+	border-radius: 0.5rem;
+	background: var(--light);
+	display: flex;
+	flex-direction: column;
+	padding: 1.5rem;
+	width: 100%;
+	box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.062);
+	gap: 1.75rem;
+}
+
+/* Typography */
+
+.title {
+	font-family: var(--noto);
+	font-size: 1.75rem;
+	font-weight: 700;
+	color: var(--dark);
+}
+
+.text {
+	font-family: var(--noto);
+	font-size: 0.9rem;
+	font-weight: 400;
+	color: var(--dark);
+}
+
