@@ -4,7 +4,7 @@ import { google } from "$lib/server/oauth/google";
 import { decodeIdToken } from "arctic";
 import type { RequestEvent } from "@sveltejs/kit";
 import type {  OAuth2Tokens } from "arctic";
-import { UserService } from "$src/features/Users/lib/userService";
+import { UserService } from "$src/features/Users/lib/UserService";
 
 
 const userService = new UserService()
