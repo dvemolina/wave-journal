@@ -52,6 +52,8 @@
 		"@oslojs/encoding": "^1.1.0",
 		"@types/leaflet": "^1.9.16",
 		"@types/node": "^22.13.9",
+		"arctic": "^3.5.0",
+		"dotenv": "^16.4.7",
 		"drizzle-orm": "^0.40.0",
 		"leaflet": "^1.9.4",
 		"postgres": "^3.4.5"
