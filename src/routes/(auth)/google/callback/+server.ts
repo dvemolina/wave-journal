@@ -5,6 +5,7 @@ import { decodeIdToken } from "arctic";
 import type { RequestEvent } from "@sveltejs/kit";
 import type {  OAuth2Tokens } from "arctic";
 import { UserService } from "$src/features/Users/lib/UserService";
+import { generateUsernameFromGoogle } from "$src/lib/utils/utils";
 
 
 const userService = new UserService()
@@ -34,8 +35,9 @@ export async function GET(event: RequestEvent): Promise<Response> {
   		return new Response("OAuth Token Exchange Failed", { status: 400 });
 	}
 	const claims = decodeIdToken(tokens.idToken());
-    
-	const googleUser = {googleId: claims.sub, name: claims.given_name, surname: claims.family_name ? clearImmediate.family_name : "", email: claims.email, profileImage: claims.picture}
+	const username = generateUsernameFromGoogle(claims);
+	console.log('Claims',claims)
+	const googleUser = {googleId: claims.sub,  name: claims.given_name, username: username, surname: claims.family_name ? clearImmediate.family_name : "", email: claims.email, profileImage: claims.picture}
 
 	// TODO: Replace this with your own DB query.
 	const existingUser = await userService.getUserByGoogleId(googleUser.googleId);
@@ -55,7 +57,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
 	const userWithEmail = await userService.getUserByEmail(googleUser.email)
 	
 	if(userWithEmail) {
-		await userService.updateUserProfile(userWithEmail.id, { googleId: googleUser.googleId } );
+		await userService.updateUser(userWithEmail.id, { googleId: googleUser.googleId } );
 		const sessionToken = generateSessionToken();
 		const session = await createSession(sessionToken, userWithEmail.id);
 		setSessionTokenCookie(event, sessionToken, session.expiresAt);
@@ -68,7 +70,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
 		});
 	}
 
-	const newUser = await userService.registerUserWithGoogleAuth(googleUser)
+	const newUser = await userService.createUser(googleUser)
 	
 	const sessionToken = generateSessionToken();
 	const session = await createSession(sessionToken, newUser.id);

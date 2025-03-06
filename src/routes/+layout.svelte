@@ -9,9 +9,9 @@
 
 <div class="layout">
 	<main
-		class="content flex h-full flex-col {isMapPage
+		class="content flex h-full w-full flex-col {isMapPage
 			? ''
-			: 'max-w-4xl items-center justify-self-center px-4 py-4 md:px-8 md:py-11'} "
+			: 'max-w-5xl items-center justify-self-center px-4 py-4 md:px-8 md:py-11'} "
 	>
 		{@render children()}
 	</main>
@@ -31,6 +31,8 @@
 
 	.content {
 		grid-row: 1 / 2;
+		width: 100%;
+		height: 100%;
 	}
 
 	.toolbar {
@@ -42,5 +44,7 @@
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
+		width: 100%;
+		height: 100%;
 	}
 </style>

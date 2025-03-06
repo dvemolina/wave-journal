@@ -29,9 +29,9 @@
 		background-color: rgba(0, 0, 0, 0.629);
 		color: white;
 	}
-	
+
 	.button:hover {
-		background-color: rgb(255, 255, 255);
+		background-color: rgba(0, 0, 0, 0.123);
 		cursor: pointer;
 		color: var(--text);
 	}

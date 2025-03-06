@@ -1,5 +1,5 @@
 import type { LayoutServerLoad } from "./$types";
-import { handleAuthRedirect } from "$src/lib/utils";
+import { handleAuthRedirect } from "$src/lib/utils/utils";
 
 
 export const load: LayoutServerLoad = async (event) => {

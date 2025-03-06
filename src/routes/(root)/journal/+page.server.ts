@@ -1,5 +1,5 @@
 import type { PageServerLoad } from "./$types";
-import { handleAuthRedirect } from "$src/lib/utils";
+import { handleAuthRedirect } from "$src/lib/utils/utils";
 
 
 

@@ -6,7 +6,7 @@
 	const session = data.session;
 </script>
 
-{#if !user || session}
+{#if !user || !session}
 	<div class="mb-8 flex flex-col items-center justify-center gap-2">
 		<img src="favicon.png" alt="Wave Journal" class="max-w-24 self-center" />
 		<div class="headings mb-4">
@@ -15,7 +15,7 @@
 		</div>
 		<GoogleBtn>Access with Google Account</GoogleBtn>
 	</div>
-	<div class="px-4 max-w-3xl">
+	<div class="max-w-3xl px-4">
 		<p class="text-justify hyphens-auto">
 			Keep track of the surf conditions at your favorite local spots. Wave Journal allows you to
 			train your own hyper-local, on-site data surf forecast model. Merge your model and reports
@@ -25,11 +25,11 @@
 			match with actual forecast. The real know before you go
 		</p>
 	</div>
-{:else if user && session}
-	<div class="box">
-		<div class="flex flex-col items-center justify-center gap-4 md:flex-row">
+{:else if user}
+	<div class="box-heading w-full">
+		<div class="flex w-full flex-col items-center justify-center gap-4 md:flex-row">
 			<img src="favicon.png" alt="Wave Journal" class="max-w-24 self-center" />
-			<div class="headings">
+			<div class="headings w-full">
 				<h1 class="title text-center md:text-start">The Wave Journal</h1>
 				<h2 class="subtitle text-center md:text-start">Hello {user.username}!</h2>
 			</div>

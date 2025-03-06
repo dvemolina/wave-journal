@@ -1,12 +1,15 @@
 import type { PageServerLoad } from "./$types";
-import { accessRedirect } from "$src/lib/utils";
+import { handleAuthRedirect } from "$src/lib/utils/utils";
+import { UserService } from "$src/features/Users/lib/UserService";
 
-
+const userService = new UserService()
 export const load: PageServerLoad = async (event) => {
     const session = event.locals.session;
     const user = event.locals.user;
 
-    if(!user || !session) return accessRedirect(event, 'Access your account to see your Profile');
+    if(!user || !session) return handleAuthRedirect(event);
 
-    return { user }
+    const userData = await userService.getUserById(user.id);
+
+    return { user, userData }
 };
