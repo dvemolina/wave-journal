@@ -11,7 +11,7 @@
 	<main
 		class="content flex h-full flex-col {isMapPage
 			? ''
-			: 'max-w-7xl items-center justify-self-center px-4 py-8 md:px-8 md:py-11'} "
+			: 'max-w-4xl items-center justify-self-center px-4 py-4 md:px-8 md:py-11'} "
 	>
 		{@render children()}
 	</main>
@@ -35,6 +35,9 @@
 
 	.toolbar {
 		grid-row: 2 / 3;
+		position: sticky;
+		bottom: 0;
+		left: 0;
 		display: flex;
 		flex-direction: row;
 		justify-content: center;

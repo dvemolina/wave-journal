@@ -12,10 +12,11 @@ body {
 
 /* Theming */
 :root {
-	--rootBackground: rgb(232, 232, 232);
+	--rootBackground: rgb(239, 239, 239);
 	--dark: rgb(5, 5, 5);
-	--neutral: rgb(118, 118, 118);
+	--neutral: rgb(91, 91, 91);
 	--light: rgb(247, 247, 247);
+	--error: rgb(186, 32, 32);
 	--noto: 'Noto Sans';
 	--share: 'Share';
 	--tech: 'Share Tech';
@@ -42,23 +43,35 @@ section {
 	flex-direction: column;
 	padding: 1.5rem;
 	width: 100%;
-	box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.062);
+	box-shadow: 1px 1px 5px 1px rgba(115, 115, 115, 0.062);
 	gap: 1.75rem;
 }
 
 /* Typography */
 
 .title {
-	font-family: var(--noto);
-	font-size: 1.75rem;
+	font-family: var(--share);
+	font-size: 2rem;
 	font-weight: 700;
 	color: var(--dark);
+}
+
+.subtitle {
+	font-family: var(--share);
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: var(--neutral);
 }
 
 .text {
 	font-family: var(--noto);
 	font-size: 0.9rem;
-	font-weight: 400;
+	font-weight: 500;
 	color: var(--dark);
 }
 
+@media (width >= 48rem /* 768px */) {
+	.box {
+		padding: 2.5rem;
+	}
+}

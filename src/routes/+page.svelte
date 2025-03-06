@@ -1,0 +1,38 @@
+<script lang="ts">
+	import GoogleBtn from '$src/components/GoogleBtn.svelte';
+
+	let { data } = $props();
+	const user = data.user;
+	const session = data.session;
+</script>
+
+{#if !user || session}
+	<div class="mb-8 flex flex-col items-center justify-center gap-2">
+		<img src="favicon.png" alt="Wave Journal" class="max-w-24 self-center" />
+		<div class="headings mb-4">
+			<h1 class="title text-center">The Wave Journal</h1>
+			<h2 class="subtitle text-center">Create your own Forecast Model</h2>
+		</div>
+		<GoogleBtn>Access with Google Account</GoogleBtn>
+	</div>
+	<div class="px-4 max-w-3xl">
+		<p class="text-justify hyphens-auto">
+			Keep track of the surf conditions at your favorite local spots. Wave Journal allows you to
+			train your own hyper-local, on-site data surf forecast model. Merge your model and reports
+			data with your friend's to increase forecast accuracy even more. Document and add forecasts
+			for your local secrets spots without fear of revealing them and only share the data with
+			whoever you want in your circle. Review past conditions that you encountered that epic day to
+			match with actual forecast. The real know before you go
+		</p>
+	</div>
+{:else if user && session}
+	<div class="box">
+		<div class="flex flex-col items-center justify-center gap-4 md:flex-row">
+			<img src="favicon.png" alt="Wave Journal" class="max-w-24 self-center" />
+			<div class="headings">
+				<h1 class="title text-center md:text-start">The Wave Journal</h1>
+				<h2 class="subtitle text-center md:text-start">Hello {user.username}!</h2>
+			</div>
+		</div>
+	</div>
+{/if}

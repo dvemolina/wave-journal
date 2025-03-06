@@ -1,7 +1,13 @@
 import 'dotenv/config'
 import { Google } from "arctic";
 
-const callbackUrl = `${process.env.PROJECT_URL}/google/callback`
+let callbackUrl;
+
+if(process.env.NODE_ENV === "production") {
+	callbackUrl = `${process.env.PROJECT_URL}/google/callback`
+} else {
+	callbackUrl = `http://localhost:5173/google/callback`
+}
 const clientId = process.env.GOOGLE_CLIENT_ID;
 const clientSecret = process.env.GOOGLE_CLIENT_SECRET
 
