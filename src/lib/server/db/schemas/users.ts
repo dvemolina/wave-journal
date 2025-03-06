@@ -1,7 +1,7 @@
 import { pgTable, text, integer, timestamp, varchar, boolean } from 'drizzle-orm/pg-core';
 import { timestamps } from './helpers';
 
-export const user = pgTable('user', {
+export const users = pgTable('users', {
 	id: integer('id').generatedAlwaysAsIdentity({ name: "users_id_sequence", startWith: 1, increment: 1, minValue: 1,  cache: 1 }).primaryKey(),
 	username: text('username').notNull(),
 	email: text('email').notNull(),
@@ -22,11 +22,12 @@ export const session = pgTable('session', {
 	id: text('id').primaryKey(),
 	userId: text('user_id')
 		.notNull()
-		.references(() => user.id),
+		.references(() => users.id),
 	expiresAt: timestamp('expires_at', { withTimezone: true, mode: 'date' }).notNull()
 });
 
 
 export type Session = typeof session.$inferSelect;
 
-export type User = typeof user.$inferSelect;
+export type User = typeof users.$inferSelect;
+export type InsertUser = typeof users.$inferInsert;
