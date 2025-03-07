@@ -1,10 +1,10 @@
 <script lang="ts">
 	import ToolBar from '../components/ToolBar.svelte';
-	import '../app.css';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	let { children } = $props();
+	import '../app.css';
 
-	let isMapPage = $derived(/\/map($|\/)/.test($page.url.pathname));
+	let isMapPage = $derived(/\/map($|\/)/.test(page.url.pathname));
 </script>
 
 <div class="layout">
