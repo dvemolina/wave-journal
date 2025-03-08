@@ -1,5 +1,6 @@
 [
-  {
+  { 
+    "id": 1,
     "name": "25",
     "link": "https://www.surf-forecast.com/breaks/Le-25",
     "region": "Central Morocco",
@@ -10,6 +11,7 @@
     "rating": "2"
   },
   {
+    "id": 2,
     "name": "Dracula",
     "link": "https://www.surf-forecast.com/breaks/Dracula",
     "region": "Central Morocco",
@@ -20,6 +22,7 @@
     "rating": "5"
   },
   {
+    "id": 3,
     "name": "Pointe d'Imessouane",
     "link": "https://www.surf-forecast.com/breaks/Pointed-Imessouane",
     "region": "Central Morocco",
@@ -30,6 +33,7 @@
     "rating": "4"
   },
   {
+    "id": 4,
     "name": "Anchor Point",
     "link": "https://www.surf-forecast.com/breaks/La-Pointedes-Ancres",
     "region": "Central Morocco",
@@ -40,6 +44,7 @@
     "rating": "5"
   },
   {
+    "id": 5,
     "name": "Hash Point",
     "link": "https://www.surf-forecast.com/breaks/Hash-Point",
     "region": "Central Morocco",
