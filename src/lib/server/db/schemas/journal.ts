@@ -1,6 +1,6 @@
 import { pgTable, text, timestamp, integer, boolean, uuid } from "drizzle-orm/pg-core";
 import { breaks } from "./breaks";
-import { CardinalPoints, CrowdSkillLevel, CrowdVolume, CurrentRip, MarineLife, RockDanger, SessionType, TideMovement, VibeInWater, WaterQuality, WaterSurface, WaveCharacter, WaveFrequency, WaveHeight, WavePeeling, WavePeelSpeed, WaveShallowness, WaveSteepness, WaveWallShape, WindConsistency, WindStrength } from "../enums";
+import { CardinalPoints, CrowdSkillLevel, CrowdVolume, CurrentRip, FacedChallenges, MarineLife, OverallFeeling, RockDanger, SessionType, TideMovement, VibeInWater, WaterQuality, WaterSurface, WaveCharacter, WaveFrequency, WaveHeight, WavePeeling, WavePeelSpeed, WaveShallowness, WaveSteepness, WaveWallShape, WindConsistency, WindStrength } from "../enums";
 
 export const journalEntries = pgTable("journal_entries", {
     id: integer('id').generatedAlwaysAsIdentity({ name: "journal_entry_id_sequence", startWith: 1, increment: 1, minValue: 1,  cache: 1 }).primaryKey(),
@@ -72,12 +72,12 @@ export const personalPerformance = pgTable("personal_performance", {
     id: integer('id').generatedAlwaysAsIdentity({ name: "personal_performance_id_sequence", startWith: 1, increment: 1, minValue: 1,  cache: 1 }).primaryKey(),
     journalEntryId: integer("journal_entry_id").notNull().references(() => journalEntries.id, { onDelete: "cascade" }),
     performanceRating: integer("performance_rating").notNull(),
-    feeling: text("feeling").notNull(),
+    feeling: text("feeling",  { enum: OverallFeeling }).notNull(),
     comments: text("comments")
 });
 
 export const challengesFaced = pgTable("challenges_faced", {
     id: integer('id').generatedAlwaysAsIdentity({ name: "challenges_faced_id_sequence", startWith: 1, increment: 1, minValue: 1,  cache: 1 }).primaryKey(),
     journalEntryId: integer("journal_entry_id").notNull().references(() => journalEntries.id, { onDelete: "cascade" }),
-    challenge: text("challenge").notNull()
+    challenge: text("challenge", { enum: FacedChallenges }).notNull()
 });
