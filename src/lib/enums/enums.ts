@@ -28,3 +28,4 @@ export const BreakType = ["point", "reef", "beach", "river_mouth", "river", "lak
 //Others
 export const CardinalPoints = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"] as const;
 export const YearSeason = ["winter", "spring", "summer", "autumn"] as const;
+

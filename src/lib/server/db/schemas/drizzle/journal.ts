@@ -1,11 +1,11 @@
 import { pgTable, text, timestamp, integer, boolean, uuid } from "drizzle-orm/pg-core";
 import { breaks } from "./breaks";
-import { CardinalPoints, CrowdSkillLevel, CrowdVolume, CurrentRip, FacedChallenges, MarineLife, OverallFeeling, RockDanger, SessionType, TideMovement, VibeInWater, WaterQuality, WaterSurface, WaveCharacter, WaveFrequency, WaveHeight, WavePeeling, WavePeelSpeed, WaveShallowness, WaveSteepness, WaveWallShape, WindConsistency, WindStrength } from "../enums";
+import { CardinalPoints, CrowdSkillLevel, CrowdVolume, CurrentRip, FacedChallenges, MarineLife, OverallFeeling, RockDanger, SessionType, TideMovement, VibeInWater, WaterQuality, WaterSurface, WaveCharacter, WaveFrequency, WaveHeight, WavePeeling, WavePeelSpeed, WaveShallowness, WaveSteepness, WaveWallShape, WindConsistency, WindStrength } from "../../../../enums/enums";
 
 export const journalEntries = pgTable("journal_entries", {
     id: integer('id').generatedAlwaysAsIdentity({ name: "journal_entry_id_sequence", startWith: 1, increment: 1, minValue: 1,  cache: 1 }).primaryKey(),
     uuid: uuid("uuid").notNull().unique(), // Offline-safe unique ID
-    type: text("type", { enum: SessionType }).notNull(), 
+    sessionType: text("session_type", { enum: SessionType }).notNull(), 
     breakId: integer("break_id").notNull().references((() => breaks.id)),
     date: timestamp("date").notNull(),
     startTime: text("start_time").notNull(),

@@ -27,3 +27,4 @@ export function generateUsernameFromGoogle(claims) {
     // Combine into username
     return `${formattedName}${firstLetterSurname}${lastThreeDigits}`;
 }
+

@@ -1,10 +1,10 @@
-import { challengesFaced, crowdConditions, environmentConditions, gearUsed, journalEntries, marineLife, personalPerformance, waveConditions, windConditions } from "$src/lib/server/db/schemas/journal"
+import { challengesFaced, crowdConditions, environmentConditions, gearUsed, journalEntries, marineLife, personalPerformance, waveConditions, windConditions } from "$src/lib/server/db/schemas/drizzle/journal"
 import { createInsertSchema } from "drizzle-zod"
 import { z } from 'zod'
 
 export const entryDetailsSchema = createInsertSchema(journalEntries);
 export const waveConditionsSchema = createInsertSchema(waveConditions);
-export const windConditionsSchema = createInsertSchema(waveConditions);
+export const windConditionsSchema = createInsertSchema(windConditions);
 export const environmentConditionsSchema = createInsertSchema(environmentConditions);
 export const marineLifeSchema = createInsertSchema(marineLife);
 export const crowdConditionsSchema = createInsertSchema(crowdConditions);

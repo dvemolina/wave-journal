@@ -1,4 +1,4 @@
-import { type InsertUser, type User } from "$src/lib/server/db/schemas/users";
+import { type InsertUser, type User } from "$src/lib/server/db/schemas/drizzle/users";
 import { UserRepository } from "$src/features/Users/lib/UserRepository";
 
 //Possibility of leveraging dependency Injection for db and contracts switching.
