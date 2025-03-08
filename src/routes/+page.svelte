@@ -8,7 +8,7 @@
 
 {#if !user || !session}
 	<div class="mb-8 flex flex-col items-center justify-center gap-2">
-		<img src="favicon.png" alt="Wave Journal" class="max-w-24 self-center" />
+		<img src="favicon.png" alt="Wave Journal" class=" self-center" />
 		<div class="headings mb-4">
 			<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">The Wave Journal</h1>
 			<h2 class="subtitle text-center">Create your own Forecast Model</h2>

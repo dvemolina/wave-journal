@@ -3,6 +3,7 @@
 	import { page } from '$app/state';
 	let { children } = $props();
 	import '../app.css';
+	import '../oldApp.css';
 
 	let isMapPage = $derived(/\/map($|\/)/.test(page.url.pathname));
 </script>
