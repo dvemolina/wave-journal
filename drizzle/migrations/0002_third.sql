@@ -1,0 +1,1 @@
+ALTER TABLE "journal_entries" RENAME COLUMN "type" TO "session_type";
