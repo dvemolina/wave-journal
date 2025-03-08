@@ -4,11 +4,13 @@
 	let { children } = $props();
 	import '../app.css';
 	import '../oldApp.css';
+	import WaveEye from '$src/components/WaveEye.svelte';
 
 	let isMapPage = $derived(/\/map($|\/)/.test(page.url.pathname));
 </script>
 
 <div class="layout">
+	<WaveEye />
 	<main
 		class="content flex h-full w-full flex-col {isMapPage
 			? ''

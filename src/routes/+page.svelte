@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Box from '$src/components/Box.svelte';
 	import GoogleBtn from '$src/components/GoogleBtn.svelte';
 
 	let { data } = $props();
@@ -26,13 +27,8 @@
 		</p>
 	</div>
 {:else if user}
-	<div class="box-heading w-full">
-		<div class="flex w-full flex-col items-center justify-center gap-4 md:flex-row">
-			<img src="favicon.png" alt="Wave Journal" class="max-w-24 self-center" />
-			<div class="headings w-full">
-				<h1 class="title text-center md:text-start">The Wave Journal</h1>
-				<h2 class="subtitle text-center md:text-start">Hello {user.username}!</h2>
-			</div>
-		</div>
-	</div>
+	<Box heading="The Wave Journal">	
+		<h2 class="subtitle">Hello {user.username}!</h2>
+	</Box>
+	
 {/if}
