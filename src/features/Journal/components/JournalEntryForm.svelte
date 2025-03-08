@@ -66,25 +66,26 @@
 		<Form.Description />
 		<Form.FieldErrors />
 	</Form.Field>
-	<div class="flex flex-col gap-3"></div>
-	<Form.Field {form} name="entryDetails.startTime">
-		<Form.Control>
-			{#snippet children({ props })}
-				<Form.Label>Session Start Time</Form.Label>
-				<Input type="time" {...props} bind:value={$formData.entryDetails.startTime} />
-			{/snippet}
-		</Form.Control>
-		<Form.Description />
-		<Form.FieldErrors />
-	</Form.Field>
-	<Form.Field {form} name="entryDetails.endTime">
-		<Form.Control>
-			{#snippet children({ props })}
-				<Form.Label>Session End Time</Form.Label>
-				<Input type="time" {...props} bind:value={$formData.entryDetails.endTime} />
-			{/snippet}
-		</Form.Control>
-		<Form.Description />
-		<Form.FieldErrors />
-	</Form.Field>
+	<div class="flex flex-col gap-1">
+		<Form.Field {form} name="entryDetails.startTime">
+			<Form.Control>
+				{#snippet children({ props })}
+					<Form.Label>Session Start Time</Form.Label>
+					<Input type="time" {...props} bind:value={$formData.entryDetails.startTime} />
+				{/snippet}
+			</Form.Control>
+			<Form.Description />
+			<Form.FieldErrors />
+		</Form.Field>
+		<Form.Field {form} name="entryDetails.endTime">
+			<Form.Control>
+				{#snippet children({ props })}
+					<Form.Label>Session End Time</Form.Label>
+					<Input type="time" {...props} bind:value={$formData.entryDetails.endTime} />
+				{/snippet}
+			</Form.Control>
+			<Form.Description />
+			<Form.FieldErrors />
+		</Form.Field>
+	</div>
 </form>
