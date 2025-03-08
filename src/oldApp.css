@@ -2,22 +2,11 @@
 
 /* Theming */
 :root {
-	--rootBackground: rgb(239, 239, 239);
-	--dark: rgb(5, 5, 5);
-	--neutral: rgb(91, 91, 91);
-	--light: rgb(247, 247, 247);
-	--error: rgb(186, 32, 32);
 	--noto: 'Noto Sans';
 	--share: 'Share';
 	--tech: 'Share Tech';
 	--archivo: 'Archivo Black';
 	--geist: 'Geist';
-}
-
-.light {
-	--text: var(--dark);
-	--textNeutral: var(--neutral);
-	--background: var(--light);
 }
 
 /* Containers */
@@ -30,7 +19,6 @@ section {
 
 .box-heading {
 	border-radius: 0.5rem;
-	background: var(--light);
 	display: flex;
 	flex-direction: column;
 	padding: 0.75rem 1.25rem;
@@ -39,7 +27,6 @@ section {
 }
 .box-content {
 	border-radius: 0.5rem;
-	background: var(--light);
 	display: flex;
 	flex-direction: column;
 	padding: 1.75rem;
@@ -54,25 +41,11 @@ section {
 	font-family: var(--geist);
 	font-size: 1.5rem;
 	font-weight: 900;
-	color: var(--dark);
 }
 
 .subtitle {
 	font-family: var(--geist);
 	font-size: 1.25rem;
 	font-weight: 600;
-	color: var(--neutral);
 }
 
-.text {
-	font-family: var(--noto);
-	font-size: 0.9rem;
-	font-weight: 500;
-	color: var(--dark);
-}
-
-@media (width >= 48rem /* 768px */) {
-	.box {
-		padding: 2.5rem;
-	}
-}
