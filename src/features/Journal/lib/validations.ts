@@ -29,10 +29,10 @@ import {
 
 // Journal Entry Schema
 export const entryDetailsSchema = z.object({
-  uuid: z.string().uuid(),
+  uuid: z.string().uuid().optional(),
   sessionType: z.enum(SessionType),
   breakId: z.number().int(),
-  date: z.string(),  // You may want to further refine this for date validation
+  date: z.string(),  // Needs further refinement for date validation
   startTime: z.string(),
   endTime: z.string(),
   syncedAt: z.string().optional(),
@@ -40,7 +40,7 @@ export const entryDetailsSchema = z.object({
 
 // Wave Conditions Schema
 export const waveConditionsSchema = z.object({
-  journalEntryId: z.number().int(),
+  //journalEntryId: z.number().int(),
   height: z.enum(WaveHeight),
   frequency: z.enum(WaveFrequency),
   character: z.enum(WaveCharacter),
@@ -54,7 +54,7 @@ export const waveConditionsSchema = z.object({
 
 // Wind Conditions Schema
 export const windConditionsSchema = z.object({
-  journalEntryId: z.number().int(),
+  //journalEntryId: z.number().int(),
   direction: z.enum(CardinalPoints),
   consistency: z.enum(WindConsistency),
   strength: z.enum(WindStrength),
@@ -62,7 +62,7 @@ export const windConditionsSchema = z.object({
 
 // Environment Conditions Schema
 export const environmentConditionsSchema = z.object({
-  journalEntryId: z.number().int(),
+  //journalEntryId: z.number().int(),
   current: z.enum(CurrentRip),
   rockDanger: z.enum(RockDanger),
   waterQuality: z.enum(WaterQuality),
@@ -71,13 +71,13 @@ export const environmentConditionsSchema = z.object({
 
 // Marine Life Schema
 export const marineLifeSchema = z.object({
-  journalEntryId: z.number().int(),
-  species: z.enum(MarineLife),
+  //journalEntryId: z.number().int(),
+  species: z.array(z.enum(MarineLife)),
 });
 
 // Crowd Conditions Schema
 export const crowdConditionsSchema = z.object({
-  journalEntryId: z.number().int(),
+  //journalEntryId: z.number().int(),
   vibe: z.enum(VibeInWater),
   volume: z.enum(CrowdVolume),
   skillLevel: z.enum(CrowdSkillLevel),
@@ -85,7 +85,7 @@ export const crowdConditionsSchema = z.object({
 
 // Gear Used Schema
 export const gearUsedSchema = z.object({
-  journalEntryId: z.number().int(),
+  //journalEntryId: z.number().int(),
   boardId: z.number().int(),
   wetsuitThickness: z.string().optional(),
   gloves: z.boolean(),
@@ -95,7 +95,7 @@ export const gearUsedSchema = z.object({
 
 // Personal Performance Schema
 export const personalPerformanceSchema = z.object({
-  journalEntryId: z.number().int(),
+  //journalEntryId: z.number().int(),
   performanceRating: z.number().int(),
   feeling: z.enum(OverallFeeling),
   comments: z.string().optional(),
@@ -103,21 +103,21 @@ export const personalPerformanceSchema = z.object({
 
 // Challenges Faced Schema
 export const challengesFacedSchema = z.object({
-  journalEntryId: z.number().int(),
-  challenge: z.enum(FacedChallenges),
+  //journalEntryId: z.number().int(),
+  challenge: z.array(z.enum(FacedChallenges)),
 });
 
 // Full Journal Entry Schema (with related tables)
 export const journalEntrySchema = z.object({
   entryDetails: entryDetailsSchema,
-  waveConditions: z.array(waveConditionsSchema),
-  windConditions: z.array(windConditionsSchema),
-  environmentConditions: z.array(environmentConditionsSchema),
-  marineLife: z.array(marineLifeSchema),
-  crowdConditions: z.array(crowdConditionsSchema),
-  gearUsed: z.array(gearUsedSchema),
-  personalPerformance: z.array(personalPerformanceSchema),
-  challengesFaced: z.array(challengesFacedSchema),
+  waveConditions: waveConditionsSchema,
+  windConditions: windConditionsSchema,
+  environmentConditions: environmentConditionsSchema,
+  marineLife: marineLifeSchema,
+  crowdConditions: crowdConditionsSchema,
+  gearUsed: gearUsedSchema,
+  personalPerformance: personalPerformanceSchema,
+  challengesFaced: challengesFacedSchema,
 });
 
 export type JournalEntrySchema = typeof journalEntrySchema;

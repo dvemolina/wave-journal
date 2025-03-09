@@ -21,7 +21,8 @@ export const WaterQuality = ["pristine", "clean", "muddy", "dirty", "polluted"] 
 export const WaterSurface = ["glassy", "normal", "groomed", "messy"] as const;
 export const FacedChallenges = ["paddling_out", "positioning", "take_off", "wave_rhythm", "wave_selection", "maneuvers"] as const;
 export const MarineLife = ["dolphins", "jelly_fish", "urchins", "sharks", "seals", "algae"] as const;
-
+export const WetsuitThickness = ["shorts", "lycra_or_shirt", "2/2", "3/2", "3/3", "4/3", "5/4", "+5"] as const;
+export const PerformanceRating = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const;
 //Breaks Enums
 export const BreakType = ["point", "reef", "beach", "river_mouth", "river", "lake", "artificial"] as const;
 
