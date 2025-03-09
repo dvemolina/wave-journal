@@ -1,6 +1,6 @@
 
 import { generateSessionToken, createSession, setSessionTokenCookie } from "$lib/server/auth";
-import { google } from "$lib/server/oauth/google";
+import { google, type GoogleClaims } from "$lib/server/oauth/google";
 import { decodeIdToken } from "arctic";
 import type { RequestEvent } from "@sveltejs/kit";
 import type {  OAuth2Tokens } from "arctic";
@@ -34,9 +34,9 @@ export async function GET(event: RequestEvent): Promise<Response> {
 		console.error("OAuth Token Exchange Error:", e);
   		return new Response("OAuth Token Exchange Failed", { status: 400 });
 	}
-	const claims = decodeIdToken(tokens.idToken());
+	const claims: GoogleClaims = decodeIdToken(tokens.idToken());
 	const username = generateUsernameFromGoogle(claims);
-	console.log('Claims',claims)
+
 	const googleUser = {googleId: claims.sub,  name: claims.given_name, username: username, surname: claims.family_name ? clearImmediate.family_name : "", email: claims.email, profileImage: claims.picture}
 
 	// TODO: Replace this with your own DB query.
