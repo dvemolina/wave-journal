@@ -8,6 +8,7 @@ export const WaveWallShape = ["crumbly", "hollow", "vertical", "varied"] as cons
 export const WavePeelSpeed = ["slow_peeling", "fast_peeling", "racy" ] as const;
 export const WaveSteepness = ["fat", "mellow", "steep", "radical"] as const;
 export const WaveShallowness = ["dry", "shallow", "medium", "deep"] as const;
+export const WindDirection = ["off_shore", "on_shore", "cross", "cross_on", "cross_off"] as const;
 export const WindConsistency = ["gusty", "steady"] as const;
 export const WindStrength = ["none", "light", "moderate", "strong", "severe", "extreme"] as const;
 export const CurrentRip = ["none", "light", "moderate", "strong", "severe", "extreme"] as const;

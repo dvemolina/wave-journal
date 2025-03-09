@@ -12,7 +12,7 @@ import {
   WavePeelSpeed, 
   WaveSteepness, 
   WaveShallowness, 
-  CardinalPoints, 
+  WindDirection,
   WindConsistency, 
   WindStrength, 
   CurrentRip, 
@@ -55,7 +55,7 @@ export const waveConditionsSchema = z.object({
 // Wind Conditions Schema
 export const windConditionsSchema = z.object({
   //journalEntryId: z.number().int(),
-  direction: z.enum(CardinalPoints),
+  direction: z.enum(WindDirection),
   consistency: z.enum(WindConsistency),
   strength: z.enum(WindStrength),
 });

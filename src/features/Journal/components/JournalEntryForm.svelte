@@ -1,5 +1,5 @@
 <script lang="ts">
-	import SuperDebug, { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
+	import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import * as Form from '$src/components/ui/form/index';
 	import { Input } from '$src/components/ui/input/index';
@@ -9,7 +9,6 @@
 	import * as Select from '$src/components/ui/select';
 	import * as Textarea from '$src/components/ui/textarea';
 	import { Checkbox } from '$src/components/ui/checkbox';
-	import type { SuperFormData } from 'sveltekit-superforms/client';
 
 	let { data, spots }: { data: { form: SuperValidated<Infer<JournalEntrySchema>> } } = $props();
 
@@ -32,9 +31,6 @@
 		// Ensure that you're removing the full value as a string
 		$formData[fieldPath[0]][fieldPath[1]] = $formData[fieldPath[0]][fieldPath[1]].filter((v: string) => v !== value);
 	}
-
-	console.log('FormData challenges= ', $formData.challengesFaced.challenge);
-	console.log('Formatted Enums Challenges= ', formattedEnums.FacedChallenges)
 
 </script>
 
@@ -343,13 +339,13 @@
 			<Select.Root type="single" name={props.name} bind:value={$formData.windConditions.direction}>
 				<Select.Trigger class="w-full">
 					{#if $formData.windConditions.direction}
-						{formattedEnums.CardinalPoints.find(item => item.value === $formData.windConditions.direction)?.label}
+						{formattedEnums.WindDirection.find(item => item.value === $formData.windConditions.direction)?.label}
 					{:else}
 						Select the wind direction
 					{/if}
 				</Select.Trigger>
 				<Select.Content>
-					{#each formattedEnums.CardinalPoints as direction}
+					{#each formattedEnums.WindDirection as direction}
 						<Select.Item value={direction.value}>{direction.label}</Select.Item>
 					{/each}
 				</Select.Content>
@@ -768,43 +764,42 @@
 	</Form.Field>
 
 
-		<!-- MARINE LIFE SECTION -->
-		<Form.Fieldset {form} name="marineLife.species" class="space-y-0">
-			<div class="mb-4">
-				<Form.Legend class="text-base">Marine Life</Form.Legend>
-				<Form.Description>
-					Select if you saw any of the following
-				</Form.Description>
-			</div>
-			<div class="space-y-2">
-				{#each formattedEnums.MarineLife as specie}
-					{@const checked = $formData.marineLife.species.includes(specie.value)}
-					<div class="flex flex-row items-start space-x-3">
-						<Form.Control>
-							{#snippet children({ props })}
-								<Checkbox
-									{...props}
-									{checked}
-									value={specie.value}
-									onCheckedChange={(v) => {
-										if (v) {
-											addItem(specie.value, ['marineLife', 'species']);
-										} else {
-											removeItem(specie.value, ['marineLife', 'species']);
-										}
-									}}
-								/>
-								<Form.Label class="font-normal">
-									{specie.label}
-								</Form.Label>
-							{/snippet}
-						</Form.Control>
-					</div>
-				{/each}
-				<Form.FieldErrors />
-			</div>
-		</Form.Fieldset>
-
+	<!-- MARINE LIFE SECTION -->
+	<Form.Fieldset {form} name="marineLife.species" class="space-y-0">
+		<div class="mb-4">
+			<Form.Legend class="text-base">Marine Life</Form.Legend>
+			<Form.Description>
+				Select if you saw any of the following
+			</Form.Description>
+		</div>
+		<div class="space-y-2">
+			{#each formattedEnums.MarineLife as specie}
+				{@const checked = $formData.marineLife.species.includes(specie.value)}
+				<div class="flex flex-row items-start space-x-3">
+					<Form.Control>
+						{#snippet children({ props })}
+							<Checkbox
+								{...props}
+								{checked}
+								value={specie.value}
+								onCheckedChange={(v) => {
+									if (v) {
+										addItem(specie.value, ['marineLife', 'species']);
+									} else {
+										removeItem(specie.value, ['marineLife', 'species']);
+									}
+								}}
+							/>
+							<Form.Label class="font-normal">
+								{specie.label}
+							</Form.Label>
+						{/snippet}
+					</Form.Control>
+				</div>
+			{/each}
+			<Form.FieldErrors />
+		</div>
+	</Form.Fieldset>
+	
+	<button type="submit">Submit Entry</button>
 </form>
-
-<SuperDebug data={$formData}/>
