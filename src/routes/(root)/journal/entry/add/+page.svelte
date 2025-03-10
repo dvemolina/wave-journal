@@ -6,5 +6,5 @@
 </script>
 
 <Box heading="Journal Entry: Session Report">
-	<JournalEntryForm {data} spots={data.spots} />
+	<JournalEntryForm {data} />
 </Box>

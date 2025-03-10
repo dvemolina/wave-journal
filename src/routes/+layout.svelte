@@ -4,17 +4,20 @@
 	let { children } = $props();
 	import '../app.css';
 	import '../oldApp.css';
-	import WaveEye from '$src/components/WaveEye.svelte';
+	import { ModeWatcher } from "mode-watcher";
+	import LightSwitch from '$src/components/LightSwitch.svelte';
 
 	let isMapPage = $derived(/\/map($|\/)/.test(page.url.pathname));
 </script>
 
+
+<ModeWatcher />
 <div class="layout">
-	<WaveEye />
+	<LightSwitch/>
 	<main
 		class="content flex h-full w-full flex-col {isMapPage
 			? ''
-			: 'max-w-5xl items-center justify-self-center px-4 py-4 md:px-8 md:py-11'} "
+			: 'max-w-5xl items-center justify-self-center px-4 py-4 pt-8 md:px-8 md:py-11'} "
 	>
 		{@render children()}
 	</main>

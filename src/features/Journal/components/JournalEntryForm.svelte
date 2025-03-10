@@ -10,6 +10,7 @@
 	import * as Textarea from '$src/components/ui/textarea';
 	import { Checkbox } from '$src/components/ui/checkbox';
 	import { journalEntrySchema, type JournalEntrySchema } from '../lib/validations';
+	import { Button } from '$src/components/ui/button';
 
 	let { data, spots }: { data: { form: SuperValidated<Infer<JournalEntrySchema>> } } = $props();
 
@@ -802,5 +803,5 @@
 		</div>
 	</Form.Fieldset>
 	
-	<button type="submit">Submit Entry</button>
+	<Button type="submit">Submit Entry</Button>
 </form>
