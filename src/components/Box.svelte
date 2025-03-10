@@ -11,10 +11,10 @@
 </script>
 
 {#if heading}
-	<div class="bg-card border-border flex { width === 'fit' ? 'w-fit' : 'w-full'} flex-col gap-3 rounded-lg border px-5 py-3 mb-3">
+	<div class="bg-card border-border flex { width === 'fit' ? 'w-fit' : 'w-full'} flex-col gap-3 rounded-lg border px-5 py-3 mb-8">
 		<p class="title text-foreground">{heading}</p>
 	</div>
 {/if}
-<div class="bg-card border-border flex w-full flex-col gap-3 rounded-lg border p-7">
+<div class="bg-card border-border flex w-full flex-col gap-3 rounded-lg border p-7 mb-3">
 	{@render children()}
 </div>
