@@ -13,7 +13,7 @@ const journalService = new JournalService()
 export const load: PageServerLoad = async () => {
     const form = await superValidate(zod(journalEntrySchema))
     const spots: Spot[] = JSON.parse(fs.readFileSync(new URL('../../../../../lib/testSpots.json', import.meta.url), 'utf8'));
-    console.log(spots)
+
     return { form, spots }
 };
 
