@@ -1,0 +1,77 @@
+{
+    "countries": [
+        {
+            "id": "es",
+            "name": "Spain",
+            "regions": [
+                {
+                    "id": "es-cantabria",
+                    "name": "Cantabria",
+                    "breaks": [
+                        { 
+                            "id": "es-cantabria-playa_de_gerra",
+                            "name": "Playa de Gerra",
+                            "lat": 43.4075, 
+                            "lon": -2.6982,
+                            "breakType": "Point",
+                            "bestSeason": "Autumn/Winter"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "ma",
+            "name": "Morocco",
+            "regions": [
+              {
+                "id": "ma-central",
+                "name": "Central Morocco",
+                "breaks": [
+                  {
+                    "id": "ma-central-25",
+                    "name": "25",
+                    "lat": 30.57,
+                    "lon": -9.7459,
+                    "breakType": "Point",
+                    "bestSeason": "Winter"
+                    
+                  },
+                  {
+                    "id": "ma-central-dracula",
+                    "name": "Dracula",
+                    "lat": 30.6228,
+                    "lon": -9.8803,
+                    "breakType": "Reef",
+                    "bestSeason": "Winter"
+                  },
+                  {
+                    "id": "ma-central-pointe_d_imessouane",
+                    "name": "Pointe d'Imessouane",
+                    "lat": 30.838,
+                    "lon": -9.8175,
+                    "breakType": "Point",
+                    "bestSeason": "Winter"
+                  },
+                  {
+                    "id": "ma-central-anchor_point",
+                    "name": "Anchor Point",
+                    "lat": 30.5485,
+                    "lon": -9.7288,
+                    "breakType": "Point",
+                    "bestSeason": "Winter"
+                  },
+                  {
+                    "id": "ma-central-hash_point",
+                    "name": "Hash Point",
+                    "lat": 30.5478,
+                    "lon": -9.712,
+                    "breakType": "Point",
+                    "bestSeason": "Winter"
+                  }
+                ]
+              }
+            ]
+          }
+    ]
+}
