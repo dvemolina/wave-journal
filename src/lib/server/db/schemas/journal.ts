@@ -1,16 +1,20 @@
-import { pgTable, text, timestamp, integer, boolean, uuid } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, integer, boolean, uuid, date } from "drizzle-orm/pg-core";
 import { breaks } from "./breaks";
-import { CardinalPoints, CrowdSkillLevel, CrowdVolume, CurrentRip, FacedChallenges, MarineLife, OverallFeeling, RockDanger, SessionType, TideMovement, VibeInWater, WaterQuality, WaterSurface, WaveCharacter, WaveFrequency, WaveHeight, WavePeeling, WavePeelSpeed, WaveShallowness, WaveSteepness, WaveWallShape, WindConsistency, WindStrength } from "../../../../enums/enums";
+import { CrowdSkillLevel, CrowdVolume, CurrentRip, FacedChallenges, MarineLife, OverallFeeling, RockDanger, SessionType, TideMovement, VibeInWater, WaterQuality, WaterSurface, WaveCharacter, WaveFrequency, WaveHeight, WavePeeling, WavePeelSpeed, WaveShallowness, WaveSteepness, WaveWallShape, WindConsistency, WindDirection, WindStrength } from "../../../enums/enums";
+import { users } from "./users";
+import { boards } from "./boards";
+import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
 
 export const journalEntries = pgTable("journal_entries", {
     id: integer('id').generatedAlwaysAsIdentity({ name: "journal_entry_id_sequence", startWith: 1, increment: 1, minValue: 1,  cache: 1 }).primaryKey(),
     uuid: uuid("uuid").notNull().unique(), // Offline-safe unique ID
+    authorId: integer('author_id').notNull().references(() => users.id),
     sessionType: text("session_type", { enum: SessionType }).notNull(), 
     breakId: integer("break_id").notNull().references((() => breaks.id)),
-    date: timestamp("date").notNull(),
+    date: date("date", { mode: 'string' }).notNull(),
     startTime: text("start_time").notNull(),
     endTime: text("end_time").notNull(),
-    syncedAt: timestamp("synced_at"), // Null if still offline
+    syncedAt: timestamp("synced_at").defaultNow().notNull() // Null if still offline
 });
 
 export const waveConditions = pgTable("wave_conditions", {
@@ -30,7 +34,7 @@ export const waveConditions = pgTable("wave_conditions", {
 export const windConditions = pgTable("wind_conditions", {
     id: integer('id').generatedAlwaysAsIdentity({ name: "wind_conditions_id_sequence", startWith: 1, increment: 1, minValue: 1,  cache: 1 }).primaryKey(),
     journalEntryId: integer("journal_entry_id").notNull().references(() => journalEntries.id, { onDelete: "cascade" }),
-    direction: text("direction", { enum: CardinalPoints }).notNull(),
+    direction: text("direction", { enum: WindDirection }).notNull(),
     consistency: text("consistency", { enum: WindConsistency }).notNull(),  
     strength: text("strength", { enum: WindStrength }).notNull()
 });
@@ -61,7 +65,7 @@ export const crowdConditions = pgTable("crowd_conditions", {
 export const gearUsed = pgTable("gear_used", {
     id: integer('id').generatedAlwaysAsIdentity({ name: "gear_used_id_sequence", startWith: 1, increment: 1, minValue: 1,  cache: 1 }).primaryKey(),
     journalEntryId: integer("journal_entry_id").notNull().references(() => journalEntries.id, { onDelete: "cascade" }),
-    boardId: integer("boardId").notNull(),
+    boardId: integer("boardId").notNull().references(() => boards.id),
     wetsuitThickness: text("wetsuit_thickness"),
     gloves: boolean("gloves").notNull().default(false),
     boots: boolean("boots").notNull().default(false),
@@ -81,3 +85,31 @@ export const challengesFaced = pgTable("challenges_faced", {
     journalEntryId: integer("journal_entry_id").notNull().references(() => journalEntries.id, { onDelete: "cascade" }),
     challenge: text("challenge", { enum: FacedChallenges }).notNull()
 });
+
+// Base insert types from schema
+type JournalEntryInsert = InferInsertModel<typeof journalEntries>;
+type WaveConditionInsert = InferInsertModel<typeof waveConditions>;
+type WindConditionInsert = InferInsertModel<typeof windConditions>;
+type EnvironmentConditionInsert = InferInsertModel<typeof environmentConditions>;
+type MarineLifeInsert = InferInsertModel<typeof marineLife>;
+type CrowdConditionInsert = InferInsertModel<typeof crowdConditions>;
+type GearUsedInsert = InferInsertModel<typeof gearUsed>;
+type PersonalPerformanceInsert = InferInsertModel<typeof personalPerformance>;
+type ChallengeFacedInsert = InferInsertModel<typeof challengesFaced>;
+
+// Modified structure to match your repository implementation
+export interface NewFullJournalEntry {
+  entryDetails: Omit<JournalEntryInsert, 'authorId'>;
+  waveConditions: Omit<WaveConditionInsert, 'journalEntryId' | 'id'>;
+  windConditions: Omit<WindConditionInsert, 'journalEntryId' | 'id'>;
+  environmentConditions: Omit<EnvironmentConditionInsert, 'journalEntryId' | 'id'>;
+  marineLife: {
+    species: MarineLifeInsert['species'][];
+  };
+  crowdConditions: Omit<CrowdConditionInsert, 'journalEntryId' | 'id'>;
+  gearUsed: Omit<GearUsedInsert, 'journalEntryId' | 'id'>;
+  personalPerformance: Omit<PersonalPerformanceInsert, 'journalEntryId' | 'id'>;
+  challengesFaced: {
+    challenge: ChallengeFacedInsert['challenge'][];
+  };
+}

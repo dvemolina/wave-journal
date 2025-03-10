@@ -4,11 +4,12 @@
 	import * as Form from '$src/components/ui/form/index';
 	import { Input } from '$src/components/ui/input/index';
 	import { formattedEnums } from '$src/lib/enums/formatEnums';
-	import { journalEntrySchema, type JournalEntrySchema } from '../lib/validations';
+
 	import * as RadioGroup from '$src/components/ui/radio-group';
 	import * as Select from '$src/components/ui/select';
 	import * as Textarea from '$src/components/ui/textarea';
 	import { Checkbox } from '$src/components/ui/checkbox';
+	import { journalEntrySchema, type JournalEntrySchema } from '../lib/validations';
 
 	let { data, spots }: { data: { form: SuperValidated<Infer<JournalEntrySchema>> } } = $props();
 

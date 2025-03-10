@@ -1,5 +1,3 @@
-
-//Work-around for Sveltekit's server-side code imports limitation 
 import { z } from 'zod';
 import { 
   SessionType, 
@@ -27,98 +25,71 @@ import {
   FacedChallenges 
 } from '$lib/enums/enums';
 
-// Journal Entry Schema
-export const entryDetailsSchema = z.object({
-  uuid: z.string().uuid().optional(),
-  sessionType: z.enum(SessionType),
-  breakId: z.number().int(),
-  date: z.string(),  // Needs further refinement for date validation
-  startTime: z.string(),
-  endTime: z.string(),
-  syncedAt: z.string().optional(),
-});
-
-// Wave Conditions Schema
-export const waveConditionsSchema = z.object({
-  //journalEntryId: z.number().int(),
-  height: z.enum(WaveHeight),
-  frequency: z.enum(WaveFrequency),
-  character: z.enum(WaveCharacter),
-  tideMovement: z.enum(TideMovement),
-  peelDirection: z.enum(WavePeeling),
-  wallShape: z.enum(WaveWallShape),
-  peelSpeed: z.enum(WavePeelSpeed),
-  steepness: z.enum(WaveSteepness),
-  shallowness: z.enum(WaveShallowness),
-});
-
-// Wind Conditions Schema
-export const windConditionsSchema = z.object({
-  //journalEntryId: z.number().int(),
-  direction: z.enum(WindDirection),
-  consistency: z.enum(WindConsistency),
-  strength: z.enum(WindStrength),
-});
-
-// Environment Conditions Schema
-export const environmentConditionsSchema = z.object({
-  //journalEntryId: z.number().int(),
-  current: z.enum(CurrentRip),
-  rockDanger: z.enum(RockDanger),
-  waterQuality: z.enum(WaterQuality),
-  waterSurface: z.enum(WaterSurface),
-});
-
-// Marine Life Schema
-export const marineLifeSchema = z.object({
-  //journalEntryId: z.number().int(),
-  species: z.array(z.enum(MarineLife)),
-});
-
-// Crowd Conditions Schema
-export const crowdConditionsSchema = z.object({
-  //journalEntryId: z.number().int(),
-  vibe: z.enum(VibeInWater),
-  volume: z.enum(CrowdVolume),
-  skillLevel: z.enum(CrowdSkillLevel),
-});
-
-// Gear Used Schema
-export const gearUsedSchema = z.object({
-  //journalEntryId: z.number().int(),
-  boardId: z.number().int(),
-  wetsuitThickness: z.string().optional(),
-  gloves: z.boolean(),
-  boots: z.boolean(),
-  hood: z.boolean(),
-});
-
-// Personal Performance Schema
-export const personalPerformanceSchema = z.object({
-  //journalEntryId: z.number().int(),
-  performanceRating: z.number().int(),
-  feeling: z.enum(OverallFeeling),
-  comments: z.string().optional(),
-});
-
-// Challenges Faced Schema
-export const challengesFacedSchema = z.object({
-  //journalEntryId: z.number().int(),
-  challenge: z.array(z.enum(FacedChallenges)),
-});
-
-// Full Journal Entry Schema (with related tables)
+// Unified Journal Entry Schema
 export const journalEntrySchema = z.object({
-  entryDetails: entryDetailsSchema,
-  waveConditions: waveConditionsSchema,
-  windConditions: windConditionsSchema,
-  environmentConditions: environmentConditionsSchema,
-  marineLife: marineLifeSchema,
-  crowdConditions: crowdConditionsSchema,
-  gearUsed: gearUsedSchema,
-  personalPerformance: personalPerformanceSchema,
-  challengesFaced: challengesFacedSchema,
+  entryDetails: z.object({
+    uuid: z.string().uuid().optional(),
+    sessionType: z.enum(SessionType),
+    breakId: z.number().int(),
+    date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),  // Validate YYYY-MM-DD format
+    startTime: z.string(),
+    endTime: z.string(),
+    syncedAt: z.date().optional(),
+  }),
+  
+  waveConditions: z.object({
+    height: z.enum(WaveHeight),
+    frequency: z.enum(WaveFrequency),
+    character: z.enum(WaveCharacter),
+    tideMovement: z.enum(TideMovement),
+    peelDirection: z.enum(WavePeeling),
+    wallShape: z.enum(WaveWallShape),
+    peelSpeed: z.enum(WavePeelSpeed),
+    steepness: z.enum(WaveSteepness),
+    shallowness: z.enum(WaveShallowness),
+  }),
+
+  windConditions: z.object({
+    direction: z.enum(WindDirection),
+    consistency: z.enum(WindConsistency),
+    strength: z.enum(WindStrength),
+  }),
+
+  environmentConditions: z.object({
+    current: z.enum(CurrentRip),
+    rockDanger: z.enum(RockDanger),
+    waterQuality: z.enum(WaterQuality),
+    waterSurface: z.enum(WaterSurface),
+  }),
+
+  marineLife: z.object({
+    species: z.array(z.enum(MarineLife)),
+  }),
+
+  crowdConditions: z.object({
+    vibe: z.enum(VibeInWater),
+    volume: z.enum(CrowdVolume),
+    skillLevel: z.enum(CrowdSkillLevel),
+  }),
+
+  gearUsed: z.object({
+    boardId: z.number().int(),
+    wetsuitThickness: z.string().optional(),
+    gloves: z.boolean(),
+    boots: z.boolean(),
+    hood: z.boolean(),
+  }),
+
+  personalPerformance: z.object({
+    performanceRating: z.number().int(),
+    feeling: z.enum(OverallFeeling),
+    comments: z.string().optional(),
+  }),
+
+  challengesFaced: z.object({
+    challenge: z.array(z.enum(FacedChallenges)),
+  }),
 });
 
-export type JournalEntrySchema = typeof journalEntrySchema;
-
+// Unified Validation Type 
+export type JournalEntrySchema = z.infer<typeof journalEntrySchema>;
