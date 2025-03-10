@@ -1,16 +1,15 @@
 import { pgTable, text, timestamp, integer, boolean, uuid, date } from "drizzle-orm/pg-core";
-import { breaks } from "./breaks";
 import { CrowdSkillLevel, CrowdVolume, CurrentRip, FacedChallenges, MarineLife, OverallFeeling, RockDanger, SessionType, TideMovement, VibeInWater, WaterQuality, WaterSurface, WaveCharacter, WaveFrequency, WaveHeight, WavePeeling, WavePeelSpeed, WaveShallowness, WaveSteepness, WaveWallShape, WindConsistency, WindDirection, WindStrength } from "../../../enums/enums";
 import { users } from "./users";
 import { boards } from "./boards";
-import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
+import type { InferInsertModel,  } from "drizzle-orm";
 
 export const journalEntries = pgTable("journal_entries", {
     id: integer('id').generatedAlwaysAsIdentity({ name: "journal_entry_id_sequence", startWith: 1, increment: 1, minValue: 1,  cache: 1 }).primaryKey(),
     uuid: uuid("uuid").notNull().unique(), // Offline-safe unique ID
     authorId: integer('author_id').notNull().references(() => users.id),
     sessionType: text("session_type", { enum: SessionType }).notNull(), 
-    breakId: integer("break_id").notNull().references((() => breaks.id)),
+    breakId: text("break_id").notNull(),
     date: date("date", { mode: 'string' }).notNull(),
     startTime: text("start_time").notNull(),
     endTime: text("end_time").notNull(),

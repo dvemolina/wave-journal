@@ -30,7 +30,7 @@ export const journalEntrySchema = z.object({
   entryDetails: z.object({
     uuid: z.string().uuid().optional(),
     sessionType: z.enum(SessionType),
-    breakId: z.number().int(),
+    breakId: z.string(),
     date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),  // Validate YYYY-MM-DD format
     startTime: z.string(),
     endTime: z.string(),
