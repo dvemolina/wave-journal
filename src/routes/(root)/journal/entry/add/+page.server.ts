@@ -2,17 +2,16 @@ import { journalEntrySchema } from "$src/features/Journal/lib/validations";
 import type { PageServerLoad } from "./$types";
 import { fail, superValidate } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
-import fs from 'fs';
-import type { Spot } from "$src/lib/types";
 import type { Actions } from "@sveltejs/kit";
 import { JournalService } from "$src/features/Journal/lib/JournalService";
 
 const journalService = new JournalService()
 
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async (event) => {
     const form = await superValidate(zod(journalEntrySchema))
-    const spots: Spot[] = JSON.parse(fs.readFileSync(new URL('../../../../../lib/testSpots.json', import.meta.url), 'utf8'));
+    const response = await event.fetch('/api/breaks');
+    const spots  = await response.json()
 
     return { form, spots }
 };

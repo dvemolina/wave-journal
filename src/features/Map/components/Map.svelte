@@ -10,17 +10,17 @@
 	} from 'svelte';
 	import L from 'leaflet';
 	import 'leaflet/dist/leaflet.css';
-	import type { Spot } from '$lib/types';
+	
 
 	interface Props {
 		children?: Snippet | undefined;
 		bounds?: L.LatLngBoundsExpression | undefined;
 		view?: L.LatLngExpression | undefined;
 		zoom?: number | undefined;
-		spots?: Spot[] 
+		breaks?: any;
 	}
 
-	let { children, bounds = undefined, view = undefined, zoom = undefined, spots }: Props = $props();
+	let { children, bounds = undefined, view = undefined, zoom = undefined, breaks }: Props = $props();
 
 	let map: L.Map | undefined = $state();
 	let mapElement: HTMLElement;
@@ -44,8 +44,13 @@
 			attribution: '© OpenStreetMap contributors'
 		}).addTo(map);
 
-		spots.forEach((spot) => {
-			L.marker([spot.lat, spot.lon]).bindPopup(`<b>${spot.name}</b>`).addTo(map);
+		breaks.countries.forEach((country) => {
+			country.regions.forEach((region) => {
+				region.breaks.forEach((breakSpot) => {
+
+					L.marker([breakSpot.lat, breakSpot.lon]).bindPopup(`<b>${breakSpot.name}</b>`).addTo(map);
+				})
+			})
 		});
 	});
 

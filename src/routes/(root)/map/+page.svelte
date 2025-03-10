@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Map from '$src/components/Map.svelte';
+	import Map from '$src/features/Map/components/Map.svelte';
 	import type { LatLngExpression } from 'leaflet';
 
 	let { data } = $props();
@@ -8,5 +8,5 @@
 </script>
 
 <div class="h-full w-full">
-	<Map view={initialView} zoom={8} spots={data.spots}></Map>
+	<Map view={initialView} zoom={8} breaks={data.breaks}></Map>
 </div>

@@ -11,8 +11,9 @@
 	import { Checkbox } from '$src/components/ui/checkbox';
 	import { journalEntrySchema, type JournalEntrySchema } from '../lib/validations';
 	import { Button } from '$src/components/ui/button';
+	import BreakFinder from '$src/features/Breaks/components/BreakFinder.svelte';
 
-	let { data, spots }: { data: { form: SuperValidated<Infer<JournalEntrySchema>> } } = $props();
+	let { data }: { data: { form: SuperValidated<Infer<JournalEntrySchema>> } } = $props();
 
 	const form = superForm(data.form, {
 		validators: zodClient(journalEntrySchema),
@@ -74,15 +75,15 @@
 	<Form.Field {form} name="entryDetails.breakId">
 		<Form.Control>
 			{#snippet children({ props })}
-				<Form.Label>Surf Break</Form.Label>
-				<Select.Root type="single" name={props.name} bind:value={$formData.entryDetails.breakId}>
-					<Select.Trigger class="w-full">Select the break</Select.Trigger>
-					<Select.Content>
-						{#each spots as spot}
-							<Select.Item value={spot.id}>{spot.name}</Select.Item>
-						{/each}
-					</Select.Content>
-				</Select.Root>
+				<Form.Label>Choose Surf Break</Form.Label>
+				<BreakFinder 
+					value={$formData.entryDetails.breakId} 
+					onChange={(breakId) => $formData.entryDetails.breakId = breakId} 
+					onBreakSelected={(breakData) => {
+					// You can use this to update the map if needed
+					// For example, you could store this in a store
+					}}
+				/>
 			{/snippet}
 		</Form.Control>
 		<Form.Description />

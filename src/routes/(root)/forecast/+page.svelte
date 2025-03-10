@@ -1,5 +1,8 @@
 <script lang="ts">
-	import type { PageData } from '../../forecast/$types';
+	import BreakFinder from '$src/features/Breaks/components/BreakFinder.svelte';
 
-	let { data }: { data: PageData } = $props();
+
+	let { data } = $props();
 </script>
+
+<BreakFinder/>

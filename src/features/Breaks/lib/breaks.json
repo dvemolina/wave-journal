@@ -11,8 +11,8 @@
                         { 
                             "id": "es-cantabria-playa_de_gerra",
                             "name": "Playa de Gerra",
-                            "lat": 43.4075, 
-                            "lon": -2.6982,
+                            "lat": 43.398890287240555,
+                            "lon":-4.359281163432367,
                             "breakType": "Point",
                             "bestSeason": "Autumn/Winter"
                         }

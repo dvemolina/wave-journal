@@ -1,9 +1,8 @@
-import type { Spot } from "$src/lib/types";
 import type { PageServerLoad } from "./$types";
-import fs from 'fs'
 
-export const load: PageServerLoad = async () => {
-    const spots: Spot[] = JSON.parse(fs.readFileSync(new URL('../../../lib/testSpots.json', import.meta.url), 'utf8'));
+export const load: PageServerLoad = async (event) => {
+    const response = await event.fetch('/api/breaks');
+    const breaks = await response.json()
 
-    return { spots }
+    return { breaks }
 };
