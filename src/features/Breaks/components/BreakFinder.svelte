@@ -110,7 +110,7 @@
 </script>
 
 <div class="flex flex-row gap-2">
-  <Select.Root onValueChange={(v) => handleCountryChange(v)} type="single">
+  <Select.Root onValueChange={(v) => handleCountryChange(v)} type="single" >
     <Select.Trigger class="min-w-[150px]">
       <span>{selectedCountry ? countries.find(c => c.id === selectedCountry)?.name : 'Country'}</span>
     </Select.Trigger>
