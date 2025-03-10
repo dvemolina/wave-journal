@@ -8,6 +8,12 @@
 	let { data }: { data: PageData } = $props();
 </script>
 
-<Box heading="Journal Entry: Session Report">
-	<Button href='/journal/entry/add'>New Journal Entry</Button>
-</Box>
+
+
+	<Box heading="Session Reports">
+		<Button href='/journal/entry/add'>Create a new session report</Button>
+	</Box>
+	<Box >
+		Previous Reports
+	</Box>
+
