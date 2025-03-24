@@ -15,5 +15,10 @@
 	</Box>
 	<Box >
 		Previous Reports
+		{#each data.journalEntries as entry}
+			<div class="border">
+				
+			</div>
+		{/each}
 	</Box>
 
